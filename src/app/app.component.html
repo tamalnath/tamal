@@ -1,3 +1,19 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-layout fullscreen>
+	<md-sidenav #sidenav align="end">
+		<md-nav-list>
+			<a md-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><md-icon>home</md-icon> &nbsp; Home</a>
+      <a md-list-item routerLink="/settings" routerLinkActive="active">Settings</a>
+      <a md-list-item routerLink="/about" routerLinkActive="active">About</a>
+	    <a md-list-item (click)="sidenav.close()">Close</a>
+		</md-nav-list>
+	</md-sidenav>
+	<md-toolbar color="primary">
+		<md-icon>home</md-icon>
+		<span>&nbsp; Tamal Kanti Nath</span>
+		<span class="filler"></span>
+		<button md-icon-button (click)="sidenav.toggle()">
+  		<md-icon>menu</md-icon>
+  	</button>
+	</md-toolbar>
+	<router-outlet></router-outlet>
+</md-sidenav-layout>
