@@ -1,3 +1,6 @@
 .filler {
   flex: auto;
 }
+.active {
+  background-color: #f5f5f5;
+}

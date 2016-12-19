@@ -12,10 +12,38 @@ import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'about', component: AboutComponent },
-  { path: '**', component: NotFoundComponent }
+  {
+    path: '',
+    component: HomeComponent,
+    data: {
+      title: 'Home',
+      icon: 'home'
+    }
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: {
+      title: 'Settings',
+      icon: 'settings'
+    }
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      title: 'About',
+      icon: 'info outline'
+    }
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    data: {
+      title: 'HTTP 404: Not found',
+      icon: 'warning'
+    }
+ }
 ];
 
 @NgModule({
