@@ -1,0 +1,21 @@
+<div> {{ (af.auth | async)?.uid }} </div>
+<md-nav-list *ngIf="!(af.auth | async)?.uid">
+  <button md-fab (click)="loginAnonymous()">
+    <md-icon>person</md-icon>
+  </button>
+  <button md-fab (click)="loginFacebook()">
+    <md-icon svgSrc="/assets/facebook.svg"></md-icon>
+  </button>
+  <button md-fab (click)="loginGithub()">
+    <md-icon svgSrc="/assets/github.svg"></md-icon>
+  </button>
+  <button md-fab (click)="loginGoogle()">
+    <md-icon svgSrc="/assets/google.svg"></md-icon>
+  </button>
+  <button md-fab (click)="loginTwitter()">
+    <md-icon svgSrc="/assets/twitter.svg"></md-icon>
+  </button>
+</md-nav-list>
+<button md-fab (click)="logout()" *ngIf="(af.auth | async)?.uid">
+  <md-icon>close</md-icon>
+</button>

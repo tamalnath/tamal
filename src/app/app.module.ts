@@ -4,12 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule, AuthProviders, AuthMethods, FirebaseAppConfig } from 'angularfire2';
 
+import { AuthenticationService } from './authentication.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {
@@ -23,6 +26,7 @@ const appRoutes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
+    canActivate: [AuthenticationService],
     data: {
       title: 'Settings',
       icon: 'settings'
@@ -33,7 +37,15 @@ const appRoutes: Routes = [
     component: AboutComponent,
     data: {
       title: 'About',
-      icon: 'info outline'
+      icon: 'info'
+    }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login',
+      icon: 'lock'
     }
   },
   {
@@ -46,22 +58,35 @@ const appRoutes: Routes = [
  }
 ];
 
+const firebaseAppConfig:FirebaseAppConfig = {
+  apiKey: "AIzaSyCpU0fDlOIuFmryLDiFOULqsQzQYdbBe44",
+  authDomain: "tamal-1a86e.firebaseapp.com",
+  databaseURL: "https://tamal-1a86e.firebaseio.com",
+  storageBucket: "tamal-1a86e.appspot.com"
+}
+const authConfiguration = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
     SettingsComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseAppConfig, authConfiguration)
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
