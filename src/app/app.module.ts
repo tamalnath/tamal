@@ -18,6 +18,7 @@ const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthenticationService],
     data: {
       title: 'Home',
       icon: 'home'

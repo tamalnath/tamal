@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AuthProviders, AuthMethods } from 'angularfire2';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -9,50 +9,30 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private angularFire: AngularFire, private authenticationService: AuthenticationService) {
-    angularFire.auth.subscribe(auth => authenticationService.login(auth));
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
   }
 
   loginAnonymous() {
-    this.angularFire.auth.login({
-      provider: AuthProviders.Anonymous,
-      method: AuthMethods.Anonymous,
-    });
+    this.authenticationService.login(AuthProviders.Anonymous, AuthMethods.Anonymous);
   }
 
   loginFacebook() {
-    this.angularFire.auth.login({
-      provider: AuthProviders.Facebook,
-      method: AuthMethods.Redirect,
-    });
+    this.authenticationService.login(AuthProviders.Facebook);
   }
 
   loginGithub() {
-    this.angularFire.auth.login({
-      provider: AuthProviders.Github,
-      method: AuthMethods.Redirect,
-    });
+    this.authenticationService.login(AuthProviders.Github);
   }
 
   loginGoogle() {
-    this.angularFire.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Redirect,
-    });
+    this.authenticationService.login(AuthProviders.Google);
   }
 
   loginTwitter() {
-    this.angularFire.auth.login({
-      provider: AuthProviders.Twitter,
-      method: AuthMethods.Redirect,
-    });
+    this.authenticationService.login(AuthProviders.Twitter);
   }
 
-  logout() {
-    this.angularFire.auth.logout();
-    this.authenticationService.logout();
-  }
 }

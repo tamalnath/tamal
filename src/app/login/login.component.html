@@ -1,11 +1,11 @@
 <md-card *ngIf="authenticationService.uid">
   <md-card-title-group>
-    <img md-card-sm-image [src]="authenticationService.photoURL">
+    <img md-card-sm-image *ngIf="authenticationService.photoURL" [src]="authenticationService.photoURL" />
     <md-card-subtitle>Welcome</md-card-subtitle>
-    <md-card-title>{{ authenticationService.displayName }}</md-card-title>
+    <md-card-title>{{ authenticationService.displayName || "Anonymous" }}</md-card-title>
   </md-card-title-group>
   <md-card-actions>
-    <button md-raised-button (click)="logout()">
+    <button md-raised-button color="accent" (click)="authenticationService.logout()">
       <md-icon>power_settings_new</md-icon>
       <span>Logout</span>
     </button>
@@ -15,7 +15,7 @@
 <md-card *ngIf="!authenticationService.uid">
   <md-card-title-group>
     <md-card-subtitle>Please login to continue...</md-card-subtitle>
-    <md-card-title>Login options</md-card-title>
+    <md-card-title>Login</md-card-title>
   </md-card-title-group>
   <md-card-actions>
     <button md-raised-button (click)="loginAnonymous()">
