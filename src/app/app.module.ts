@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     component: AboutComponent,
     data: {
       title: 'About',
-      icon: 'info'
+      icon: 'info_outline'
     }
   },
   {

@@ -1,21 +1,42 @@
-<div> {{ (af.auth | async)?.uid }} </div>
-<md-nav-list *ngIf="!(af.auth | async)?.uid">
-  <button md-fab (click)="loginAnonymous()">
-    <md-icon>person</md-icon>
-  </button>
-  <button md-fab (click)="loginFacebook()">
-    <md-icon svgSrc="/assets/facebook.svg"></md-icon>
-  </button>
-  <button md-fab (click)="loginGithub()">
-    <md-icon svgSrc="/assets/github.svg"></md-icon>
-  </button>
-  <button md-fab (click)="loginGoogle()">
-    <md-icon svgSrc="/assets/google.svg"></md-icon>
-  </button>
-  <button md-fab (click)="loginTwitter()">
-    <md-icon svgSrc="/assets/twitter.svg"></md-icon>
-  </button>
-</md-nav-list>
-<button md-fab (click)="logout()" *ngIf="(af.auth | async)?.uid">
-  <md-icon>close</md-icon>
-</button>
+<md-card *ngIf="authenticationService.uid">
+  <md-card-title-group>
+    <img md-card-sm-image [src]="authenticationService.photoURL">
+    <md-card-subtitle>Welcome</md-card-subtitle>
+    <md-card-title>{{ authenticationService.displayName }}</md-card-title>
+  </md-card-title-group>
+  <md-card-actions>
+    <button md-raised-button (click)="logout()">
+      <md-icon>power_settings_new</md-icon>
+      <span>Logout</span>
+    </button>
+  </md-card-actions>
+</md-card>
+
+<md-card *ngIf="!authenticationService.uid">
+  <md-card-title-group>
+    <md-card-subtitle>Please login to continue...</md-card-subtitle>
+    <md-card-title>Login options</md-card-title>
+  </md-card-title-group>
+  <md-card-actions>
+    <button md-raised-button (click)="loginAnonymous()">
+      <md-icon>person</md-icon>
+      <span>Anonymous</span>
+    </button>
+    <button md-raised-button (click)="loginFacebook()">
+      <md-icon svgSrc="/assets/facebook.svg"></md-icon>
+      <span>Facebook</span>
+    </button>
+    <button md-raised-button (click)="loginGithub()">
+      <md-icon svgSrc="/assets/github.svg"></md-icon>
+      <span>Github</span>
+    </button>
+    <button md-raised-button (click)="loginGoogle()">
+      <md-icon svgSrc="/assets/google.svg"></md-icon>
+      <span>Google</span>
+    </button>
+    <button md-raised-button (click)="loginTwitter()">
+      <md-icon svgSrc="/assets/twitter.svg"></md-icon>
+      <span>Twitter</span>
+    </button>
+  </md-card-actions>
+</md-card>
