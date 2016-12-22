@@ -65,10 +65,6 @@ const firebaseAppConfig:FirebaseAppConfig = {
   databaseURL: "https://tamal-1a86e.firebaseio.com",
   storageBucket: "tamal-1a86e.appspot.com"
 }
-const authConfiguration = {
-  provider: AuthProviders.Google,
-  method: AuthMethods.Redirect
-}
 
 @NgModule({
   declarations: [
@@ -85,7 +81,7 @@ const authConfiguration = {
     HttpModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseAppConfig, authConfiguration)
+    AngularFireModule.initializeApp(firebaseAppConfig, {})
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

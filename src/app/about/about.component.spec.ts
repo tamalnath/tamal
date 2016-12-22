@@ -14,7 +14,6 @@ describe('AboutComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AboutComponent ],
       imports: [ MaterialModule.forRoot() ],
-      imports: [ MaterialModule.forRoot() ]
     })
     .compileComponents();
   }));
