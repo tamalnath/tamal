@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import { MdIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,11 @@ export class AppComponent {
   title = "Tamal Kanti Nath";
   icon = "face";
 
-  constructor(private titleService:Title, private router:Router, private authenticationService: AuthenticationService) {
+  constructor(private titleService:Title,
+    private mdIconRegistry: MdIconRegistry,
+    private sanitizer: DomSanitizer,
+    private router:Router,
+    private authenticationService: AuthenticationService) {
     router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
         let data = router.routerState.root.snapshot.firstChild.data;
@@ -21,6 +26,8 @@ export class AppComponent {
         titleService.setTitle(data['title']);
       }
     });
+    let svg: SafeResourceUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/company.svg');
+    mdIconRegistry.addSvgIconSetInNamespace('company', svg);
   }
 
 }
