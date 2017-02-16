@@ -79,9 +79,9 @@ const firebaseAppConfig:FirebaseAppConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseAppConfig, {})
+    AngularFireModule.initializeApp(firebaseAppConfig, {}, 'tamal')
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

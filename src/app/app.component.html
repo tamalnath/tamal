@@ -1,4 +1,4 @@
-<md-sidenav-layout fullscreen>
+<md-sidenav-container fullscreen>
 	<md-sidenav #sidenav align="end">
 		<md-nav-list>
 			<a md-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
@@ -25,4 +25,4 @@
   	</button>
 	</md-toolbar>
 	<router-outlet></router-outlet>
-</md-sidenav-layout>
+</md-sidenav-container>
