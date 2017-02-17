@@ -1,28 +1,22 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { TestBed, async } from '@angular/core/testing';
+import { MaterialModule } from '@angular/material';
 
 import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
-    })
-    .compileComponents();
+      declarations: [ SettingsComponent ],
+      imports: [ MaterialModule ],
+    });
+    TestBed.compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(SettingsComponent);
+    fixture.detectChanges();
+    const componentInstance = fixture.debugElement.componentInstance;
+    expect(componentInstance).toBeTruthy();
   });
 });
