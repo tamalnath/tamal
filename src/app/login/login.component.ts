@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthProviders, AuthMethods } from 'angularfire2';
+import { User, auth } from 'firebase/app';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -16,23 +16,22 @@ export class LoginComponent implements OnInit {
   }
 
   loginAnonymous() {
-    this.authenticationService.login(AuthProviders.Anonymous, AuthMethods.Anonymous);
   }
 
   loginFacebook() {
-    this.authenticationService.login(AuthProviders.Facebook);
+    this.authenticationService.login(new auth.FacebookAuthProvider);
   }
 
   loginGithub() {
-    this.authenticationService.login(AuthProviders.Github);
+    this.authenticationService.login(new auth.GithubAuthProvider);
   }
 
   loginGoogle() {
-    this.authenticationService.login(AuthProviders.Google);
+    this.authenticationService.login(new auth.GoogleAuthProvider);
   }
 
   loginTwitter() {
-    this.authenticationService.login(AuthProviders.Twitter);
+    this.authenticationService.login(new auth.TwitterAuthProvider);
   }
 
 }

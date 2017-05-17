@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User, auth } from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
@@ -10,8 +12,10 @@ export class AuthenticationService implements CanActivate {
   public displayName: string;
   public photoURL: string;
 
-  constructor(private router: Router, private angularFire: AngularFire) {
-    angularFire.auth.subscribe(auth => this.callback(auth));
+  user: Observable<User>;
+
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
+    this.user = angularFireAuth.authState;
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {
@@ -23,33 +27,20 @@ export class AuthenticationService implements CanActivate {
     return false;
   }
 
-  public login(authProviders: AuthProviders, authMethods: AuthMethods = AuthMethods.Redirect) {
-    this.angularFire.auth.login({
-      provider: authProviders,
-      method: authMethods
-    });
+  public login(authProvider: auth.AuthProvider) {
+    this.angularFireAuth.auth.signInWithPopup(authProvider).then(response => {
+      this.uid = response.user.uid;
+      this.displayName = response.user.displayName;
+      this.photoURL = response.user.photoURL;
+      console.log(response);
+    }, reject => console.log(reject));
   }
 
   public logout() {
     this.uid = null;
     this.displayName = null;
     this.photoURL = null;
-    this.angularFire.auth.logout();
-  }
-
-  private callback(auth : FirebaseAuthState) {
-    if (auth) {
-      this.uid = auth.uid;
-      this.displayName = auth.auth.displayName;
-      this.photoURL = auth.auth.photoURL;
-      if (this.redirectUrl) {
-        this.router.navigate([this.redirectUrl]);
-      }
-    } else {
-      this.uid = null;
-      this.displayName = null;
-      this.photoURL = null;
-    }
+    this.angularFireAuth.auth.signOut();
   }
 
 }

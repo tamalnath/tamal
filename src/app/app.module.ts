@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFireModule, AuthProviders, AuthMethods, FirebaseAppConfig } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 import { AuthenticationService } from './authentication.service';
 import { AppComponent } from './app.component';
@@ -59,13 +62,6 @@ const appRoutes: Routes = [
  }
 ];
 
-const firebaseAppConfig:FirebaseAppConfig = {
-  apiKey: "AIzaSyCpU0fDlOIuFmryLDiFOULqsQzQYdbBe44",
-  authDomain: "tamal-1a86e.firebaseapp.com",
-  databaseURL: "https://tamal-1a86e.firebaseio.com",
-  storageBucket: "tamal-1a86e.appspot.com"
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,11 +73,14 @@ const firebaseAppConfig:FirebaseAppConfig = {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     MaterialModule,
+    MaterialModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseAppConfig, {}, 'tamal')
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
