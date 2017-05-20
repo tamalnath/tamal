@@ -13,7 +13,6 @@ import { AuthenticationService } from './authentication.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 
@@ -25,15 +24,6 @@ const appRoutes: Routes = [
     data: {
       title: 'Home',
       icon: 'home'
-    }
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    canActivate: [AuthenticationService],
-    data: {
-      title: 'Settings',
-      icon: 'settings'
     }
   },
   {
@@ -67,7 +57,6 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    SettingsComponent,
     AboutComponent,
     LoginComponent
   ],
@@ -76,7 +65,6 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
     MaterialModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),

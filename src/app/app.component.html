@@ -4,10 +4,7 @@
 			<a md-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
 				<md-icon>home</md-icon> &nbsp; Home
 			</a>
-      <a md-list-item routerLink="/settings" routerLinkActive="active" (click)="sidenav.close()">
-				<md-icon>settings</md-icon> &nbsp; Settings
-			</a>
-      <a md-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
+			<a md-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
 				<md-icon>info</md-icon> &nbsp; About
 			</a>
 		</md-nav-list>
@@ -17,8 +14,8 @@
 		<span>&nbsp; {{title}}</span>
 		<span class="filler"></span>
 		<a md-icon-button routerLink="/login">
-			<img [src]="authenticationService.photoURL" *ngIf="authenticationService.photoURL" />
-			<md-icon *ngIf="!authenticationService.photoURL">face</md-icon>
+			<img [src]="authenticationService.user.photoURL" *ngIf="authenticationService.user?.photoURL" />
+			<md-icon *ngIf="!authenticationService.user?.photoURL">face</md-icon>
 		</a>
 		<button md-icon-button (click)="sidenav.toggle()">
   		<md-icon>menu</md-icon>

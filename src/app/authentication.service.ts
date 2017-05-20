@@ -2,24 +2,21 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User, auth } from 'firebase/app';
+import { User, auth, Promise } from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
 
-  public redirectUrl: string;
-  public uid: string;
-  public displayName: string;
-  public photoURL: string;
-
-  user: Observable<User>;
+  private redirectUrl: string;
+  public user: User;
+  public inProgress: boolean;
+  public message: string;
 
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
-    this.user = angularFireAuth.authState;
   }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {
-    if (this.uid) {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.user) {
       return true;
     }
     this.redirectUrl = state.url;
@@ -28,19 +25,51 @@ export class AuthenticationService implements CanActivate {
   }
 
   public login(authProvider: auth.AuthProvider) {
-    this.angularFireAuth.auth.signInWithPopup(authProvider).then(response => {
-      this.uid = response.user.uid;
-      this.displayName = response.user.displayName;
-      this.photoURL = response.user.photoURL;
-      console.log(response);
-    }, reject => console.log(reject));
+    let promise: Promise<any>;
+    if (authProvider == null) {
+      promise = this.angularFireAuth.auth.signInAnonymously();
+    } else {
+      promise = this.angularFireAuth.auth.signInWithPopup(authProvider);
+    }
+    this.inProgress = true;
+    promise.then(response => {
+      this.inProgress = false;
+      this.user = this.angularFireAuth.auth.currentUser;
+      this.message = null;
+      if (this.redirectUrl) {
+        this.router.navigate([this.redirectUrl]);
+      }
+    }, reject => {
+      this.inProgress = false;
+      this.user = undefined;
+      try {
+        let msg = JSON.parse(reject.message);
+        this.message  = msg["error"]["message"];
+      } catch (e) {
+        this.message = reject.message;
+      }
+      console.log(reject);
+    });
   }
 
   public logout() {
-    this.uid = null;
-    this.displayName = null;
-    this.photoURL = null;
-    this.angularFireAuth.auth.signOut();
+    this.angularFireAuth.auth.signOut().then(Response => {
+      this.inProgress = false;
+      this.user = this.angularFireAuth.auth.currentUser;
+      this.message = null;
+    }, reject => {
+      this.inProgress = false;
+      try {
+        let msg = JSON.parse(reject.message);
+        this.message  = msg["error"]["message"];
+      } catch (e) {
+        this.message = reject.message;
+      }
+      console.log(reject);
+    });
   }
 
 }
+
+// code:"auth/internal-error"
+// message:"An internal error has occurred."

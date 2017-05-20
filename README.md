@@ -33,4 +33,4 @@ Run `firebase serve` to start a local server for your static assets. Navigate to
 
 ## Deploy
 
-Run `firebase serve` to deploy code and assets to your Firebase project
+Run `firebase deploy` to deploy code and assets to your Firebase project

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User, auth } from 'firebase/app';
 import { AuthenticationService } from '../authentication.service';
 
@@ -7,15 +7,13 @@ import { AuthenticationService } from '../authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private authenticationService: AuthenticationService) {
   }
 
-  ngOnInit() {
-  }
-
   loginAnonymous() {
+    this.authenticationService.login(null);
   }
 
   loginFacebook() {

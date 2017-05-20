@@ -1,8 +1,8 @@
-<md-card *ngIf="authenticationService.uid">
+<md-card *ngIf="authenticationService.user">
   <md-card-title-group>
-    <img md-card-sm-image *ngIf="authenticationService.photoURL" [src]="authenticationService.photoURL" />
+    <img md-card-sm-image *ngIf="authenticationService.user.photoURL" [src]="authenticationService.user.photoURL" />
     <md-card-subtitle>Welcome</md-card-subtitle>
-    <md-card-title>{{ authenticationService.displayName || "Anonymous" }}</md-card-title>
+    <md-card-title>{{ authenticationService.user.displayName || "Anonymous User" }}</md-card-title>
   </md-card-title-group>
   <md-card-actions>
     <button md-raised-button color="accent" (click)="authenticationService.logout()">
@@ -12,29 +12,29 @@
   </md-card-actions>
 </md-card>
 
-<md-card *ngIf="!authenticationService.uid">
+<md-card *ngIf="!authenticationService.user">
   <md-card-title-group>
-    <md-card-subtitle>Please login to continue...</md-card-subtitle>
     <md-card-title>Login</md-card-title>
+    <md-card-subtitle>{{authenticationService.message}}</md-card-subtitle>
   </md-card-title-group>
   <md-card-actions>
-    <button md-raised-button (click)="loginAnonymous()">
+    <button md-raised-button (click)="loginAnonymous()" [disabled]="authenticationService.inProgress">
       <md-icon>person</md-icon>
       <span>Anonymous</span>
     </button>
-    <button md-raised-button (click)="loginFacebook()">
+    <button md-raised-button (click)="loginFacebook()" [disabled]="authenticationService.inProgress">
       <md-icon svgIcon="company:facebook"></md-icon>
       <span>Facebook</span>
     </button>
-    <button md-raised-button (click)="loginGithub()">
+    <button md-raised-button (click)="loginGithub()" [disabled]="authenticationService.inProgress">
       <md-icon svgIcon="company:github"></md-icon>
       <span>Github</span>
     </button>
-    <button md-raised-button (click)="loginGoogle()">
+    <button md-raised-button (click)="loginGoogle()" [disabled]="authenticationService.inProgress">
       <md-icon svgIcon="company:google"></md-icon>
       <span>Google</span>
     </button>
-    <button md-raised-button (click)="loginTwitter()">
+    <button md-raised-button (click)="loginTwitter()" [disabled]="authenticationService.inProgress">
       <md-icon svgIcon="company:twitter"></md-icon>
       <span>Twitter</span>
     </button>
