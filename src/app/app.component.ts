@@ -17,7 +17,7 @@ export class AppComponent {
     private mdIconRegistry: MdIconRegistry,
     private sanitizer: DomSanitizer,
     private router:Router,
-    private authenticationService: AuthenticationService) {
+    public authenticationService: AuthenticationService) {
     router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
         let data = router.routerState.root.snapshot.firstChild.data;
