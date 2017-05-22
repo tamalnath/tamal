@@ -7,14 +7,16 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { environment } from '../environments/environment';
+import { GraphicsModule } from '../graphics/graphics.module';
 
 import { AuthenticationService } from './authentication.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   {
@@ -27,11 +29,12 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'dashboard',
+    // canActivate: [AuthenticationService],
+    component: DashboardComponent,
     data: {
-      title: 'About',
-      icon: 'info_outline'
+      title: 'Dashboard',
+      icon: 'dashboard'
     }
   },
   {
@@ -57,8 +60,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    AboutComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,9 @@ const appRoutes: Routes = [
     MaterialModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
+    GraphicsModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

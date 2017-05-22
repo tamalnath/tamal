@@ -70,6 +70,3 @@ export class AuthenticationService implements CanActivate {
   }
 
 }
-
-// code:"auth/internal-error"
-// message:"An internal error has occurred."
