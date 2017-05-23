@@ -1,7 +1,13 @@
 <svg viewBox="-100 -100 200 200">
   <circle cx="0" cy="0" r="95" stroke="black" stroke-width="1" fill="white" />
   <text *ngFor="let number of numbers" [attr.x]="number.point.x * 80" [attr.y]="number.point.y * 80">{{number.value}}</text>
-  <line [attr.x1]="hour.x * -10" [attr.y1]="hour.y * -10" [attr.x2]="hour.x * 50" [attr.y2]="hour.y * 50" style="stroke-width: 3"  />
-  <line [attr.x1]="minute.x * -10" [attr.y1]="minute.y * -10" [attr.x2]="minute.x * 60" [attr.y2]="minute.y * 60" style="stroke-width: 2" />
-  <line [attr.x1]="second.x * -10" [attr.y1]="second.y * -10" [attr.x2]="second.x * 70" [attr.y2]="second.y * 70" style="stroke-width: 1" />
+  <line [attr.x1]="hour.x * -10" [attr.y1]="hour.y * -10" [attr.x2]="hour.x * 40" [attr.y2]="hour.y * 50" style="stroke-width: 3">
+    <animateTransform attributeName="transform" type="rotate" dur="43200s" values="0, 0, 0; 360, 0, 0" repeatCount="indefinite" />
+  </line>
+  <line [attr.x1]="minute.x * -10" [attr.y1]="minute.y * -10" [attr.x2]="minute.x * 60" [attr.y2]="minute.y * 60" style="stroke-width: 2">
+    <animateTransform attributeName="transform" type="rotate" dur="3600s" values="0, 0, 0; 360, 0, 0" repeatCount="indefinite" />
+  </line>
+  <line [attr.x1]="second.x * -10" [attr.y1]="second.y * -10" [attr.x2]="second.x * 70" [attr.y2]="second.y * 70" style="stroke-width: 1">
+    <animateTransform attributeName="transform" type="rotate" dur="60s" values="0, 0, 0; 360, 0, 0" repeatCount="indefinite" />
+  </line>
 </svg>

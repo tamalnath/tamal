@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Tz } from './tz';
 
 interface Point {
   x: number;
@@ -16,13 +15,13 @@ interface Number {
   templateUrl: './clock.component.html',
   styleUrls: ['./clock.component.css']
 })
-export class ClockComponent implements OnInit, OnDestroy {
-  @Input() private timezone: string;
-  private numbers: Number[] = [];
-  private hour: Point = { x: 0, y: 0 };
-  private minute: Point = { x: 0, y: 0 };
-  private second: Point = { x: 0, y: 0 };
-  private timer: any;
+export class ClockComponent implements OnInit {
+  @Input()
+  private timezoneOffset: number;
+  public numbers: Number[] = [];
+  public hour: Point;
+  public minute: Point;
+  public second: Point;
 
   constructor() {
     for (let i: number = 1; i <= 12; i++) {
@@ -33,24 +32,17 @@ export class ClockComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let offset : number = Tz.getTimezoneOffset(this.timezone);
-    this.timer = setInterval(() => {
-      let date: Date = new Date();
-      date = new Date(date.getTime() + offset * 60000);
-      let s: number = date.getUTCSeconds() + date.getUTCMilliseconds() / 1000;
-      let m: number = date.getUTCMinutes() + s / 60;
-      let h: number = date.getUTCHours() + m / 60;
-      s = Math.PI * s / 30;
-      m = Math.PI * m / 30;
-      h = Math.PI * h / 6;
-      this.second = { x: Math.sin(s), y: -Math.cos(s) };
-      this.minute = { x: Math.sin(m), y: -Math.cos(m) };
-      this.hour = { x: Math.sin(h), y: -Math.cos(h) };
-    }, 100);
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.timer);
+    let date: Date = new Date();
+    date = new Date(date.getTime() + this.timezoneOffset * 60000);
+    let s: number = date.getUTCSeconds() + date.getUTCMilliseconds() / 1000;
+    let m: number = date.getUTCMinutes() + s / 60;
+    let h: number = date.getUTCHours() + m / 60;
+    s = Math.PI * s / 30;
+    m = Math.PI * m / 30;
+    h = Math.PI * h / 6;
+    this.second = { x: Math.sin(s), y: -Math.cos(s) };
+    this.minute = { x: Math.sin(m), y: -Math.cos(m) };
+    this.hour = { x: Math.sin(h), y: -Math.cos(h) };
   }
 
 }
