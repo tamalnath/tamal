@@ -1,30 +1,24 @@
-/* tslint:disable:no-unused-variable */
-
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { environment } from '../environments/environment';
 import { AuthenticationService } from './authentication.service';
-
-const firebaseAppConfig:FirebaseAppConfig = {
-  apiKey: "AIzaSyCpU0fDlOIuFmryLDiFOULqsQzQYdbBe44",
-  authDomain: "tamal-1a86e.firebaseapp.com",
-  databaseURL: "https://tamal-1a86e.firebaseio.com",
-  storageBucket: "tamal-1a86e.appspot.com"
-}
 
 describe('AuthenticationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-        AngularFireModule.initializeApp(firebaseAppConfig, {})
+        RouterTestingModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebase),
       ],
       providers: [AuthenticationService]
     });
   });
 
-  it('should ...', inject([AuthenticationService], (service: AuthenticationService) => {
+  it('should be created', inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
   }));
 });

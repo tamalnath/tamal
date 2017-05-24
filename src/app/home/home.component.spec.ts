@@ -13,7 +13,7 @@ describe('HomeComponent', () => {
     TestBed.compileComponents();
   }));
 
-  it('should create', () => {
+  it('should be created', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
     const componentInstance = fixture.debugElement.componentInstance;

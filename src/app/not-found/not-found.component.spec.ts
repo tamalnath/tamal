@@ -13,7 +13,7 @@ describe('NotFoundComponent', () => {
     TestBed.compileComponents();
   }));
 
-  it('should create', () => {
+  it('should be created', () => {
     const fixture = TestBed.createComponent(NotFoundComponent);
     fixture.detectChanges();
     const component = fixture.componentInstance;

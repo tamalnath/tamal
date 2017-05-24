@@ -1,17 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { environment } from '../../environments/environment';
 import { LoginComponent } from './login.component';
 import { AuthenticationService } from '../authentication.service';
-
-const firebaseAppConfig:FirebaseAppConfig = {
-  apiKey: "AIzaSyCpU0fDlOIuFmryLDiFOULqsQzQYdbBe44",
-  authDomain: "tamal-1a86e.firebaseapp.com",
-  databaseURL: "https://tamal-1a86e.firebaseio.com",
-  storageBucket: "tamal-1a86e.appspot.com"
-}
 
 describe('LoginComponent', () => {
 
@@ -21,14 +16,15 @@ describe('LoginComponent', () => {
       imports: [
         MaterialModule,
         RouterTestingModule,
-        AngularFireModule.initializeApp(firebaseAppConfig, {})
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebase)
       ],
       providers: [AuthenticationService],
     });
     TestBed.compileComponents();
   }));
 
-  it('should create', () => {
+  it('should be created', () => {
     const fixture = TestBed.createComponent(LoginComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
