@@ -1,2 +1,28 @@
-<clock [timezoneOffset]="0"></clock>
-<clock [timezoneOffset]="330"></clock>
+<div class="containerX">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12px">
+        <div fxFlex>
+            <md-card>
+                <md-card-title>Pie Chart</md-card-title>
+                <md-card-content>
+                    <pie-chart [data]="pieChart"></pie-chart>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div fxFlex>
+            <md-card>
+                <md-card-title>GMT Clock</md-card-title>
+                <md-card-content>
+                    <clock></clock>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div fxFlex>
+            <md-card>
+                <md-card-title>IST Clock</md-card-title>
+                <md-card-content>
+                    <clock [timezoneOffset]="330"></clock>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>

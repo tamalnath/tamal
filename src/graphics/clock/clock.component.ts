@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 interface Point {
   x: number;
@@ -16,8 +16,10 @@ interface Number {
   styleUrls: ['./clock.component.css']
 })
 export class ClockComponent implements OnInit {
+
   @Input()
   private timezoneOffset: number;
+
   public numbers: Number[] = [];
   public hour: Point;
   public minute: Point;
@@ -33,7 +35,9 @@ export class ClockComponent implements OnInit {
 
   ngOnInit(): void {
     let date: Date = new Date();
-    date = new Date(date.getTime() + this.timezoneOffset * 60000);
+    if (this.timezoneOffset) {
+      date = new Date(date.getTime() + this.timezoneOffset * 60000);
+    }
     let s: number = date.getUTCSeconds() + date.getUTCMilliseconds() / 1000;
     let m: number = date.getUTCMinutes() + s / 60;
     let h: number = date.getUTCHours() + m / 60;
