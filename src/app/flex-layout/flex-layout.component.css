@@ -1,0 +1,13 @@
+div.container {
+    border-style: groove;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 5px;
+}
+.blocks {
+    min-width: 2rem;
+    min-height: 2rem;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}

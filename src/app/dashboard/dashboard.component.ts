@@ -9,11 +9,19 @@ import { Pie } from 'graphics/pie-chart/pie-chart.component';
 export class DashboardComponent {
 
   pieChart: Pie[] = [
-    { name: 'red', value: 1, color: 'red', children: [
-      { name: 'orange', value: 1, color: 'orange' },
-      { name: 'pink', value: 2, color: 'pink' },
+    { name: 'expense', value: 14000, children: [
+      { name: 'rent', value: 7000 },
+      { name: 'groceries', value: 5000 },
+      { name: 'transport', value: 2000 },
     ] },
-    { name: 'green', value: 2, color: 'green' },
-    { name: 'blue', value: 3, color: 'blue' },
+    { name: 'debt', value: 5000, color: 'red', children: [
+      { name: 'car loan', value: 4000 },
+      { name: 'credit card', value: 1000 },
+    ] },
+    { name: 'investment', value: 9000, color: 'green', children: [
+      { name: 'fixed deposit', value: 3000 },
+      { name: 'share', value: 4000 },
+      { name: 'mutual fund', value: 2000 },
+    ] },
   ];
 }

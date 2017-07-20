@@ -1,0 +1,38 @@
+<h3>DOM containers:</h3>
+<div  [fxLayout]=fxLayout fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%" class="container">
+  <div class="blocks" style="background-color: red">1</div>
+  <div class="blocks" style="background-color: green; min-width: 3rem">2</div>
+  <div class="blocks" style="background-color: blue; min-height: 3rem">3</div>
+</div>
+
+<code>&lt;div fxLayout="{{fxLayout}}" fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%"&gt;&lt;div&gt;</code>
+<p>
+  fxLayout =
+  <md-radio-group [(ngModel)]="fxLayout">
+    <md-radio-button *ngFor="let fxLayout of fxLayoutArray" [value]="fxLayout">
+      {{fxLayout}} &nbsp;
+    </md-radio-button>
+  </md-radio-group>
+</p>
+<p>
+  fxLayoutAlign mainAxis =
+  <md-radio-group [(ngModel)]="mainAxis">
+    <md-radio-button *ngFor="let mainAxis of mainAxisArray" [value]="mainAxis">
+      {{mainAxis}} &nbsp;
+    </md-radio-button>
+  </md-radio-group>
+</p>
+<p>
+  fxLayoutAlign crossAxis =
+  <md-radio-group [(ngModel)]="crossAxis">
+    <md-radio-button *ngFor="let crossAxis of crossAxisArray" [value]="crossAxis">
+      {{crossAxis}} &nbsp;
+    </md-radio-button>
+  </md-radio-group>
+</p>
+<p>
+  fxLayoutGap =
+  <md-slider min="0" max="20" #fxLayoutGap></md-slider>
+</p>
+<h3>DOM elements:</h3>
+TODO

@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FlexLayoutComponent } from './flex-layout/flex-layout.component';
 
 const appRoutes: Routes = [
   {
@@ -35,7 +36,16 @@ const appRoutes: Routes = [
     component: DashboardComponent,
     data: {
       title: 'Dashboard',
-      icon: 'dashboard'
+      icon: 'pie_chart'
+    }
+  },
+  {
+    path: 'flex-layout',
+    // canActivate: [AuthenticationService],
+    component: FlexLayoutComponent,
+    data: {
+      title: 'Flex Layout',
+      icon: 'view_column'
     }
   },
   {
@@ -63,6 +73,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     LoginComponent,
     DashboardComponent,
+    FlexLayoutComponent,
   ],
   imports: [
     BrowserModule,

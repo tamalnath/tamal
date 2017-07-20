@@ -9,6 +9,7 @@ export interface Pie {
 
 interface Path {
   name: string,
+  value: number,
   color: string,
   d: string
 }
@@ -45,11 +46,12 @@ export class PieChartComponent implements OnInit {
     let sa: number = startAngle;
     data.forEach(item => {
       let ea: number = sa + (endAngle - startAngle) * (item.value / total);
-      let ir: number = 100 * (depth - 1) / this.maxDepth;
-      let or: number = 100 * depth / this.maxDepth;
+      let ir: number = 100 * Math.sqrt((depth - 1) / this.maxDepth);
+      let or: number = 100 * Math.sqrt(depth / this.maxDepth);
       let d: string = this.getPath(sa, ea, ir, or);
       this.paths.push({
         name: item.name,
+        value: item.value,
         color: item.color ? item.color : this.getRandomColor(),
         d: d
       });
@@ -79,7 +81,7 @@ export class PieChartComponent implements OnInit {
   }
 
   getRandomColor(): string {
-    return "yellow";
+    return "#" + Math.round(Math.random() * 0xFFFFFF).toString(16);
   }
 
 }
