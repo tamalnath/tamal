@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { MdIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent {
   icon = "face";
 
   constructor(private titleService:Title,
-    private mdIconRegistry: MdIconRegistry,
+    private matIconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
     private router:Router,
     public authenticationService: AuthenticationService) {
@@ -27,7 +27,7 @@ export class AppComponent {
       }
     });
     let svg: SafeResourceUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/company.svg');
-    mdIconRegistry.addSvgIconSetInNamespace('company', svg);
+    matIconRegistry.addSvgIconSetInNamespace('company', svg);
   }
 
 }

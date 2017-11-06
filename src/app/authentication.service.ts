@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User, auth, Promise } from 'firebase/app';
+import { User, auth } from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
@@ -25,7 +25,7 @@ export class AuthenticationService implements CanActivate {
   }
 
   public login(authProvider: auth.AuthProvider) {
-    let promise: Promise<any>;
+    let promise: any;
     if (authProvider == null) {
       promise = this.angularFireAuth.auth.signInAnonymously();
     } else {

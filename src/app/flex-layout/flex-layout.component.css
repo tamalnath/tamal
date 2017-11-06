@@ -1,5 +1,5 @@
 div.container {
-    border-style: groove;
+    border-style: inset;
     width: 15rem;
     height: 15rem;
     border-radius: 5px;

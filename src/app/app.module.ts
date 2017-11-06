@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatListModule, MatRadioModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -80,7 +80,14 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
+
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatRadioModule,
+    MatSidenavModule,
+    MatToolbarModule,
+
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),

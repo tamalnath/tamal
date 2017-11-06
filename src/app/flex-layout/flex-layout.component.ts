@@ -16,4 +16,12 @@ export class FlexLayoutComponent {
   crossAxisArray: string[] = [ 'start', 'center', 'end', 'stretch' ];
   crossAxis: string = 'start';
 
+  fxFlexArray: string[] = [ 'grow', 'auto', 'none', 'nogrow', 'noshrink' ];
+
+  blocks: any[] = [
+    { color: "red", flex: "auto" },
+    { color: "green", flex: "auto" },
+    { color: "blue", flex: "auto" },
+    { color: "purple", flex: "auto" },
+  ];
 }

@@ -1,38 +1,77 @@
-<h3>DOM containers:</h3>
-<div  [fxLayout]=fxLayout fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%" class="container">
-  <div class="blocks" style="background-color: red">1</div>
-  <div class="blocks" style="background-color: green; min-width: 3rem">2</div>
-  <div class="blocks" style="background-color: blue; min-height: 3rem">3</div>
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12px">
+  <mat-card>
+      <mat-card-title>DOM containers</mat-card-title>
+      <mat-card-subtitle>&lt;div fxLayout="{{fxLayout}}" fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%"&gt;&lt;div&gt;</mat-card-subtitle>
+      <mat-card-content>
+        <div [fxLayout]="fxLayout" fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%" class="container">
+          <div class="blocks" style="background-color: red">1</div>
+          <div class="blocks" style="background-color: green; min-width: 3rem">2</div>
+          <div class="blocks" style="background-color: blue; min-height: 3rem">3</div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <span>fxLayout: </span>
+        <mat-radio-group [(ngModel)]="fxLayout">
+          <mat-radio-button *ngFor="let fxLayout of fxLayoutArray" [value]="fxLayout">
+            {{fxLayout}} &nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <span>fxLayoutAlign (mainAxis): </span>
+        <mat-radio-group [(ngModel)]="mainAxis">
+          <mat-radio-button *ngFor="let mainAxis of mainAxisArray" [value]="mainAxis">
+            {{mainAxis}} &nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <span>fxLayoutAlign (crossAxis): </span>
+        <mat-radio-group [(ngModel)]="crossAxis">
+          <mat-radio-button *ngFor="let crossAxis of crossAxisArray" [value]="crossAxis">
+            {{crossAxis}} &nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <span>fxLayoutGap: </span>
+        <mat-slider min="0" max="20" #fxLayoutGap></mat-slider>
+      </mat-card-actions>
+  </mat-card>
+  <mat-card>
+      <mat-card-title>DOM elements</mat-card-title>
+      <mat-card-content fxLayout="row">
+        <div *ngFor="let block of blocks" class="blocks" [fxFlex]="block.flex" [style.background-color]="block.color"></div>
+      </mat-card-content>
+      <mat-card-actions>
+        <p *ngFor="let block of blocks">
+          fxFlex ({{block.color}}) =
+          <mat-radio-group [(ngModel)]="block.flex">
+            <mat-radio-button *ngFor="let flex of fxFlexArray" [value]="flex">
+              {{flex}} &nbsp;
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
+      </mat-card-actions>
+  </mat-card>
 </div>
-
-<code>&lt;div fxLayout="{{fxLayout}}" fxLayoutAlign="{{mainAxis}} {{crossAxis}}" fxLayoutGap="{{fxLayoutGap.value}}%"&gt;&lt;div&gt;</code>
+<h3>MediaQueries and Aliases:</h3>
 <p>
-  fxLayout =
-  <md-radio-group [(ngModel)]="fxLayout">
-    <md-radio-button *ngFor="let fxLayout of fxLayoutArray" [value]="fxLayout">
-      {{fxLayout}} &nbsp;
-    </md-radio-button>
-  </md-radio-group>
+  Screen Size:
+  <span fxHide fxShow.xs="true">xs</span>
+  <span fxHide fxShow.sm="true">sm</span>
+  <span fxHide fxShow.md="true">md</span>
+  <span fxHide fxShow.lg="true">lg</span>
+  <span fxHide fxShow.xl="true">xl</span>
 </p>
 <p>
-  fxLayoutAlign mainAxis =
-  <md-radio-group [(ngModel)]="mainAxis">
-    <md-radio-button *ngFor="let mainAxis of mainAxisArray" [value]="mainAxis">
-      {{mainAxis}} &nbsp;
-    </md-radio-button>
-  </md-radio-group>
+  Show when less than:
+  <span fxHide fxShow.lt-sm="true">lt-sm</span>
+  <span fxHide fxShow.lt-md="true">lt-md</span>
+  <span fxHide fxShow.lt-lg="true">lt-lg</span>
+  <span fxHide fxShow.lt-xl="true">lt-xl</span>
 </p>
 <p>
-  fxLayoutAlign crossAxis =
-  <md-radio-group [(ngModel)]="crossAxis">
-    <md-radio-button *ngFor="let crossAxis of crossAxisArray" [value]="crossAxis">
-      {{crossAxis}} &nbsp;
-    </md-radio-button>
-  </md-radio-group>
+  Show when greanter than:
+  <span fxHide fxShow.gt-xs="true">gt-xs</span>
+  <span fxHide fxShow.gt-sm="true">gt-sm</span>
+  <span fxHide fxShow.gt-md="true">gt-md</span>
+  <span fxHide fxShow.gt-lg="true">gt-lg</span>
 </p>
-<p>
-  fxLayoutGap =
-  <md-slider min="0" max="20" #fxLayoutGap></md-slider>
-</p>
-<h3>DOM elements:</h3>
-TODO

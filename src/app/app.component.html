@@ -1,28 +1,28 @@
-<md-sidenav-container fullscreen>
-	<md-sidenav #sidenav align="end">
-		<md-nav-list>
-			<a md-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
-				<md-icon>home</md-icon> &nbsp; Home
+<mat-sidenav-container fullscreen>
+	<mat-sidenav #sidenav align="end">
+		<mat-nav-list>
+			<a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
+				<mat-icon>home</mat-icon> &nbsp; Home
 			</a>
-			<a md-list-item routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.close()">
-				<md-icon>pie_chart</md-icon> &nbsp; Dashboard
+			<a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>pie_chart</mat-icon> &nbsp; Dashboard
 			</a>
-			<a md-list-item routerLink="/flex-layout" routerLinkActive="active" (click)="sidenav.close()">
-				<md-icon>view_column</md-icon> &nbsp; Flex Layout
+			<a mat-list-item routerLink="/flex-layout" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>view_column</mat-icon> &nbsp; Flex Layout
 			</a>
-		</md-nav-list>
-	</md-sidenav>
-	<md-toolbar color="primary">
-		<md-icon>{{icon}}</md-icon>
+		</mat-nav-list>
+	</mat-sidenav>
+	<mat-toolbar color="primary">
+		<mat-icon>{{icon}}</mat-icon>
 		<span>&nbsp; {{title}}</span>
 		<span class="filler"></span>
-		<a md-icon-button routerLink="/login">
+		<a mat-icon-button routerLink="/login">
 			<img [src]="authenticationService.user.photoURL" *ngIf="authenticationService.user?.photoURL" />
-			<md-icon *ngIf="!authenticationService.user?.photoURL">face</md-icon>
+			<mat-icon *ngIf="!authenticationService.user?.photoURL">face</mat-icon>
 		</a>
-		<button md-icon-button (click)="sidenav.toggle()">
-  		<md-icon>menu</md-icon>
+		<button mat-icon-button (click)="sidenav.toggle()">
+  		<mat-icon>menu</mat-icon>
   	</button>
-	</md-toolbar>
+	</mat-toolbar>
 	<router-outlet></router-outlet>
-</md-sidenav-container>
+</mat-sidenav-container>
