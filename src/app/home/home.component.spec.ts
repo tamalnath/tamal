@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
+import { MatCardModule, MatIconModule } from '@angular/material';
 
 import { HomeComponent } from './home.component';
 
@@ -8,7 +8,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
-      imports: [ MaterialModule ]
+      imports: [ MatCardModule, MatIconModule ]
     });
     TestBed.compileComponents();
   }));

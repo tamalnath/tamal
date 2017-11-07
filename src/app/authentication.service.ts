@@ -25,7 +25,7 @@ export class AuthenticationService implements CanActivate {
   }
 
   public login(authProvider: auth.AuthProvider) {
-    let promise: any;
+    let promise: Promise<any>;
     if (authProvider == null) {
       promise = this.angularFireAuth.auth.signInAnonymously();
     } else {
@@ -53,7 +53,7 @@ export class AuthenticationService implements CanActivate {
   }
 
   public logout() {
-    this.angularFireAuth.auth.signOut().then(Response => {
+    this.angularFireAuth.auth.signOut().then(response => {
       this.inProgress = false;
       this.user = this.angularFireAuth.auth.currentUser;
       this.message = null;

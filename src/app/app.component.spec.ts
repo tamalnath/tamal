@@ -1,5 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -16,8 +17,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
       imports: [
+        MatIconModule,
+        MatListModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        NoopAnimationsModule,
         RouterTestingModule,
-        MaterialModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebase)
       ],

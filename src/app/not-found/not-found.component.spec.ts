@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
+import { MatCardModule, MatIconModule } from '@angular/material';
 
 import { NotFoundComponent } from './not-found.component';
 
@@ -8,7 +8,7 @@ describe('NotFoundComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NotFoundComponent ],
-      imports: [ MaterialModule ]
+      imports: [ MatCardModule, MatIconModule ]
     });
     TestBed.compileComponents();
   }));

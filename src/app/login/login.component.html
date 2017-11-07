@@ -1,6 +1,6 @@
 <mat-card *ngIf="authenticationService.user">
   <mat-card-title-group>
-    <img mat-card-mat-image *ngIf="authenticationService.user.photoURL" [src]="authenticationService.user.photoURL" />
+    <img mat-card-md-image *ngIf="authenticationService.user.photoURL" [src]="authenticationService.user.photoURL" />
     <mat-card-subtitle>Welcome</mat-card-subtitle>
     <mat-card-title>{{ authenticationService.user.displayName || "Anonymous User" }}</mat-card-title>
   </mat-card-title-group>

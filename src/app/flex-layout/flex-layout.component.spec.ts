@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule, MatRadioModule, MatSliderModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 import { FlexLayoutComponent } from './flex-layout.component';
 
@@ -8,7 +11,8 @@ describe('FlexLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlexLayoutComponent ]
+      declarations: [ FlexLayoutComponent ],
+      imports: [ FormsModule, MatCardModule, MatRadioModule, MatSliderModule, FlexLayoutModule ]
     })
     .compileComponents();
   }));
