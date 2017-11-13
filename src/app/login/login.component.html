@@ -17,9 +17,9 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
-    <img mat-card-image src="/assets/busy.gif" *ngIf="authenticationService.inProgress">
+    <mat-spinner *ngIf="authenticationService.progress"></mat-spinner>
   </mat-card-content>
-  <mat-card-actions *ngIf="!authenticationService.inProgress">
+  <mat-card-actions *ngIf="!authenticationService.progress">
     <button mat-raised-button (click)="loginAnonymous()">
       <mat-icon>person</mat-icon>
       <span>Anonymous</span>

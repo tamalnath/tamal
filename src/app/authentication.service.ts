@@ -7,9 +7,9 @@ import { User, auth } from 'firebase/app';
 @Injectable()
 export class AuthenticationService implements CanActivate {
 
-  private redirectUrl: string;
+  private redirectUrl: string = "/";
   public user: User;
-  public inProgress: boolean;
+  public progress: boolean;
   public message: string;
 
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
@@ -20,7 +20,7 @@ export class AuthenticationService implements CanActivate {
       return true;
     }
     this.redirectUrl = state.url;
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login');
     return false;
   }
 
@@ -31,16 +31,14 @@ export class AuthenticationService implements CanActivate {
     } else {
       promise = this.angularFireAuth.auth.signInWithPopup(authProvider);
     }
-    this.inProgress = true;
+    this.progress = true;
     promise.then(response => {
-      this.inProgress = false;
+      this.progress = false;
       this.user = this.angularFireAuth.auth.currentUser;
       this.message = null;
-      if (this.redirectUrl) {
-        this.router.navigate([this.redirectUrl]);
-      }
+      this.router.navigateByUrl(this.redirectUrl);
     }, reject => {
-      this.inProgress = false;
+      this.progress = false;
       this.user = undefined;
       try {
         let msg = JSON.parse(reject.message);
@@ -54,11 +52,11 @@ export class AuthenticationService implements CanActivate {
 
   public logout() {
     this.angularFireAuth.auth.signOut().then(response => {
-      this.inProgress = false;
+      this.progress = false;
       this.user = this.angularFireAuth.auth.currentUser;
       this.message = null;
     }, reject => {
-      this.inProgress = false;
+      this.progress = false;
       try {
         let msg = JSON.parse(reject.message);
         this.message  = msg["error"]["message"];
