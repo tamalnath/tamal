@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatRadioModule, MatSidenavModule, MatSliderModule, MatToolbarModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
@@ -19,7 +18,6 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FlexLayoutComponent } from './flex-layout/flex-layout.component';
 
 const appRoutes: Routes = [
   {
@@ -38,15 +36,6 @@ const appRoutes: Routes = [
     data: {
       title: 'Dashboard',
       icon: 'pie_chart'
-    }
-  },
-  {
-    path: 'flex-layout',
-    // canActivate: [AuthenticationService],
-    component: FlexLayoutComponent,
-    data: {
-      title: 'Flex Layout',
-      icon: 'view_column'
     }
   },
   {
@@ -74,7 +63,6 @@ const appRoutes: Routes = [
     NotFoundComponent,
     LoginComponent,
     DashboardComponent,
-    FlexLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +81,6 @@ const appRoutes: Routes = [
     MatSliderModule,
     MatToolbarModule,
 
-    FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
