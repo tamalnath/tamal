@@ -8,6 +8,7 @@ import { Pie } from 'graphics/pie-chart/pie-chart.component';
 })
 export class DashboardComponent {
 
+  timezone: number = undefined;
   pieChart: Pie[] = [
     { name: 'expense', value: 14000, children: [
       { name: 'rent', value: 7000 },

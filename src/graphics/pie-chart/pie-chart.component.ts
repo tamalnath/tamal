@@ -34,7 +34,6 @@ export class PieChartComponent implements OnInit {
   ngOnInit(): void {
     this.maxDepth = this.getDepth(this.data);
     this.addPath(this.data);
-    console.log(this.paths);
   }
 
   getDepth(data: Pie[], depth: number = 1): number {
