@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { MatCardModule, MatIconModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -10,12 +10,14 @@ import { AuthenticationService } from '../authentication.service';
 
 describe('LoginComponent', () => {
 
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
         MatCardModule,
         MatIconModule,
+        MatProgressSpinnerModule,
         RouterTestingModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebase)

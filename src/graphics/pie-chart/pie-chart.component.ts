@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 
-export interface Pie {
+export interface PieChartData {
   name: string,
   value: number,
   color?: string,
-  children?: Pie[],
+  children?: PieChartData[],
 }
 
 interface Path {
@@ -24,44 +24,49 @@ interface Point {
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css']
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnChanges {
 
   @Input()
-  private data: Pie[];
-  private maxDepth: number;
-  public paths: Path[] = [];
+  private data: PieChartData[];
+  public paths: Path[];
 
-  ngOnInit(): void {
-    this.maxDepth = this.getDepth(this.data);
-    this.addPath(this.data);
+  ngOnChanges(): void {
+    this.draw();
   }
 
-  getDepth(data: Pie[], depth: number = 1): number {
-    return data.map(item => item.children ? this.getDepth(item.children, depth + 1) : depth).reduce((a, b) => Math.max(a, b), 0);
+  private draw(): void {
+    let maxDepth = this.getDepth(this.data);
+    this.paths = this.getPaths(this.data, 0, Math.PI * 2, 1, maxDepth);
   }
 
-  addPath(data: Pie[], startAngle: number = 0, endAngle: number = 2 * Math.PI, depth: number = 1) {
+  private getDepth(data: PieChartData[], depth: number = 1): number {
+    return data.map(item => item.children ? this.getDepth(item.children, depth + 1) : depth).reduce((a, b) => Math.max(a, b), depth);
+  }
+
+  private getPaths(data: PieChartData[], startAngle: number, endAngle: number, depth: number, maxDepth: number) : Path[] {
+    let paths: Path[] = [];
     let total: number = data.map(item => item.value).reduce((a, b) => a + b, 0);
     let sa: number = startAngle;
     data.forEach(item => {
       let ea: number = sa + (endAngle - startAngle) * (item.value / total);
-      let ir: number = 100 * Math.sqrt((depth - 1) / this.maxDepth);
-      let or: number = 100 * Math.sqrt(depth / this.maxDepth);
+      let ir: number = Math.sqrt((depth - 1) / maxDepth);
+      let or: number = Math.sqrt(depth / maxDepth);
       let d: string = this.getPath(sa, ea, ir, or);
-      this.paths.push({
+      paths.push({
         name: item.name,
         value: item.value,
         color: item.color ? item.color : this.getRandomColor(),
         d: d
       });
       if (item.children) {
-        this.addPath(item.children, sa, ea, depth + 1);
+        paths = paths.concat(this.getPaths(item.children, sa, ea, depth + 1, maxDepth));
       }
       sa = ea;
     });
+    return paths;
   }
 
-  getPath(startAngle: number, endAngle: number, innerRadius: number, outerRadius: number): string {
+  private getPath(startAngle: number, endAngle: number, innerRadius: number, outerRadius: number): string {
     // y is negated as y value decreases in top and increases in the bottom
     let innerStart: Point = { x: innerRadius * Math.cos(startAngle), y: - innerRadius * Math.sin(startAngle) };
     let innerEnd: Point = { x: innerRadius * Math.cos(endAngle), y: - innerRadius * Math.sin(endAngle) };
@@ -79,7 +84,7 @@ export class PieChartComponent implements OnInit {
     return move + lineOut + arcOut + lineIn + arcIn + " Z";
   }
 
-  getRandomColor(): string {
+  private getRandomColor(): string {
     return "#" + Math.round(Math.random() * 0xFFFFFF).toString(16);
   }
 

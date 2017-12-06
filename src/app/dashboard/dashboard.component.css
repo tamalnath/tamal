@@ -30,3 +30,10 @@
     }
 
 }
+
+.wide {
+    grid-column-start: span 2;
+}
+.full-width {
+    width: 100%;
+}
