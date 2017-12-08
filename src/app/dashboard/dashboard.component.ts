@@ -9,7 +9,7 @@ import { PieChartData } from 'graphics/pie-chart/pie-chart.component';
 export class DashboardComponent {
 
   timezone: number = undefined;
-  private pieChart: PieChartData[] = [
+  pieChart: PieChartData[] = [
     { name: 'Red', value: 3, color: 'red', children: [
       { name: 'Orange', value: 1, color: 'orange' },
       { name: 'Pink', value: 2, color: 'pink' },

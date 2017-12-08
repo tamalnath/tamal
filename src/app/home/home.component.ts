@@ -1,4 +1,6 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, VERSION as ANGULAR_VERSION } from '@angular/core';
+import { VERSION as MATERIAL_VERSION } from '@angular/material';
+import { SDK_VERSION as FIREBASE_VERSION } from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,8 @@ import { Component, VERSION } from '@angular/core';
 })
 export class HomeComponent {
 
-  version = VERSION.full;
+  angular = ANGULAR_VERSION.full;
+  material = MATERIAL_VERSION.full;
+  firebase = FIREBASE_VERSION;
 
 }
