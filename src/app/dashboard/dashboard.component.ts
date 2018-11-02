@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PieChartData } from 'graphics/pie-chart/pie-chart.component';
+import { PieChartData } from '../../graphics/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-dashboard',
