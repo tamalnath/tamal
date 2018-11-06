@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User, auth } from 'firebase/app';
-import 'firebase/auth';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
 
   private redirectUrl: string = "/";
   public user: User;
-  public progress: boolean;
   public message: string;
 
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (!environment.production) {
+      return true;
+    }
     if (this.user) {
       return true;
     }
@@ -26,23 +28,22 @@ export class AuthenticationService implements CanActivate {
 
   public login(authProvider: auth.AuthProvider) {
     let promise: Promise<any>;
+    this.message = 'progress';
     if (authProvider == null) {
       promise = this.angularFireAuth.auth.signInAnonymously();
     } else {
       promise = this.angularFireAuth.auth.signInWithPopup(authProvider);
     }
-    this.progress = true;
     promise.then(response => {
-      this.progress = false;
-      this.user = this.angularFireAuth.auth.currentUser;
-      this.message = null;
+      this.user = response.user;
+      // this.user = this.angularFireAuth.auth.currentUser;
+      this.message = undefined;
       this.router.navigateByUrl(this.redirectUrl);
     }, reject => {
-      this.progress = false;
       this.user = undefined;
       try {
         let msg = JSON.parse(reject.message);
-        this.message  = msg["error"]["message"];
+        this.message = msg["error"]["message"];
       } catch (e) {
         this.message = reject.message;
       }
@@ -51,12 +52,11 @@ export class AuthenticationService implements CanActivate {
   }
 
   public logout() {
+    this.message = 'progress';
     this.angularFireAuth.auth.signOut().then(response => {
-      this.progress = false;
+      this.message = undefined;
       this.user = this.angularFireAuth.auth.currentUser;
-      this.message = null;
     }, reject => {
-      this.progress = false;
       try {
         let msg = JSON.parse(reject.message);
         this.message  = msg["error"]["message"];

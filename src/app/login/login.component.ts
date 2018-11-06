@@ -10,6 +10,7 @@ import { AuthenticationService } from '../authentication.service';
 export class LoginComponent {
 
   constructor(public authenticationService: AuthenticationService) {
+    authenticationService.message = 'login';
   }
 
   loginAnonymous() {

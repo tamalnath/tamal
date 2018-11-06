@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationService } from './authentication.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommonComponent } from './common/common.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -18,11 +19,20 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    // canActivate: [AuthenticationService],
+    canActivate: [AuthenticationService],
     component: DashboardComponent,
     data: {
       title: 'Dashboard',
       icon: 'pie_chart'
+    }
+  },
+  {
+    path: 'common',
+    component: CommonComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'Common Module',
+      icon: 'code'
     }
   },
   {

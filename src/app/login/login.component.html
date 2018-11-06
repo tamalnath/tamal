@@ -1,3 +1,4 @@
+<div>
 <mat-card *ngIf="authenticationService.user">
   <mat-card-title-group>
     <img mat-card-md-image *ngIf="authenticationService.user.photoURL" [src]="authenticationService.user.photoURL" />
@@ -17,9 +18,10 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
-    <mat-spinner *ngIf="authenticationService.progress"></mat-spinner>
+    <mat-spinner *ngIf="authenticationService.message=='progress'"></mat-spinner>
+    <p>{{authenticationService.message}}</p>
   </mat-card-content>
-  <mat-card-actions *ngIf="!authenticationService.progress">
+  <mat-card-actions *ngIf="authenticationService.message!=='progress'">
     <button mat-raised-button (click)="loginAnonymous()">
       <mat-icon>person</mat-icon>
       <span>Anonymous</span>

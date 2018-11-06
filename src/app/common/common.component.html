@@ -1,0 +1,21 @@
+<div></div>
+<mat-card>
+  <mat-card-title>NgIf Example</mat-card-title>
+  <mat-card-content>
+    Selected Company:
+    <button mat-button>
+      <ng-template *ngIf="icon; then showIcon; else showName"></ng-template>
+    </button>
+    <ng-template #showIcon>
+        <mat-icon [svgIcon]="'company:' + company"></mat-icon>
+    </ng-template>
+    <ng-template #showName>{{company}}</ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-radio-group [(ngModel)]="company">
+      <mat-radio-button *ngFor="let company of companies" [value]="company">{{company}}</mat-radio-button>
+    </mat-radio-group>
+    &nbsp;
+    <mat-checkbox [(ngModel)]="icon">Icon</mat-checkbox>
+  </mat-card-actions>
+</mat-card>
