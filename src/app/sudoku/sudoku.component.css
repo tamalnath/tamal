@@ -1,0 +1,43 @@
+.stretch {
+    width: 100%;
+}
+
+.sudoku {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+.sudoku td {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid gray;
+    cursor: default;
+ }
+.sudoku td:nth-child(3n+0) {
+    border-right: 2px solid black;
+}
+.sudoku tr:nth-child(3n+0) {
+    border-bottom:  2px solid black;
+}
+
+.read-only {
+    color: gray;
+ }
+
+ .editable {
+    color: black;
+ }
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.cell-notes {
+    font-size: xx-small;
+}
+
+.cell-value {
+    font-size: x-large;
+}

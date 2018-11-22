@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Sudoku</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="stretch">
+      <textarea matInput placeholder="Load Sudoku table... (Any non-digit characters will be ignored. 0 means empty cell.)" [(ngModel)]="data"></textarea>
+    </mat-form-field>
+    <table *ngIf="sudoku" class="sudoku">
+      <tr *ngFor="let row of sudoku.rows">
+        <td *ngFor="let cell of row.cells" [class]="cell.initial == 0 ? 'editable' : 'read-only'">
+            <ng-template *ngIf="cell.value == '0'; then showOption; else showValue"></ng-template>
+            <ng-template #showOption>
+              <div class="grid">
+                <small *ngFor="let note of cell.notes" class="cell-notes">
+                  {{note}}
+                </small>
+              </div>
+            </ng-template>
+            <ng-template #showValue>
+              <span class="cell-value">{{cell.value}}</span>
+            </ng-template>
+          </td>
+      </tr>
+    </table>
+    <ul>
+      <li *ngFor="let hint of sudoku.hints">{{hint}}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="sudoku.load(data)">Load</button>
+    <button mat-raised-button (click)="sudoku.reset()">Reset</button>
+    <button mat-raised-button (click)="hint()">Hint</button>
+    <button mat-raised-button>Solve</button>
+  </mat-card-actions>
+</mat-card>
