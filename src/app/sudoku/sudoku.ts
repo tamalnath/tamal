@@ -54,10 +54,12 @@ export class Sudoku {
 
     hint(): string {
         let message = this.findSingles();
-        if (message != null) {
-            return message;
+        if (message == null) {
+            message = this.findUnique();
         }
-        message = this.findUnique();
+        if (message == null) {
+            message = this.findPairs();
+        }
         return message;
     }
 
@@ -75,6 +77,17 @@ export class Sudoku {
         let message: string = null;
         for (let group of this.groups) {
             message = group.findUnique();
+            if (message != null) {
+                break;
+            }
+        }
+        return message;
+    }
+
+    findPairs(): string {
+        let message: string = null;
+        for (let group of this.groups) {
+            message = group.findPairs();
             if (message != null) {
                 break;
             }
@@ -147,6 +160,10 @@ export class Group {
                 return this.id + " can have only " + value + " at " + cell.id;
             }
         }
+        return null;
+    }
+
+    findPairs(): string {
         return null;
     }
 
